@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Form Check History{% endblock %}
+
+
+{% block content %}
+
+<div class="d-flex align-items-center flex-column mt-5 mb-3">
+    <h1>Form Check History</h1>
+
+    {% for item in form_checks %}
+    <div class="card" style="width: 30rem; margin: 10px">
+        <video width="500" height="400" controls="controls" class="card-img-top">
+            <source src="{{ item.skeleton_video.url }}" type="video/mp4"/>
+        </video>
+        <div class="card-body">
+            {% if item.prediction == "good" %}
+            <h5>Nice! We didn't detect any big issues with your squat. Make sure to double-check</h5>
+            {% else %}
+            <h5>We believe your squat form could use some work.</h5>
+            {% endif %}
+            <p class="card-text">{{ item.created_at }}</p>
+            <ul>
+                {% if item.nearest1.label == "bad" %}
+                <li> {{ item.nearest1.feedback }}</li>
+                {% endif %}
+                {% for feedback in item.additional_feedback_as_list %}
+                <li> {{ feedback }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

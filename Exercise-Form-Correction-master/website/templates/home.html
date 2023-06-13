@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% load static %}
+<header class="jumbotron jumbotron-fluid">
+    <div class="container-fluid text-center w-50 p-3">
+        <h1 class="display-3">Check your workout form!</h1>
+        <p>This website will help new and old users to correct their exercise forms.
+            Having to pay for a real life coach is no longer needed once you sign up with us.
+            No matter what exercise, we have it all. Using AI built technology our website
+            can detect your movements and give you the feedback to obtain a good form after
+            a couple of sessions. Our website helps users improve on their exercise forms no matter
+            to age or gender. If there is an exercise that is not here already let us know we
+            will help train the AI to adapt to new exercises.</p>
+    </div>
+</header>
+
+
+<section id="services" class="container">
+    <h2 class="display-4 text-center mt-5 mb-3">Our Services</h2>
+
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" style="height: 200px;" src="{% static 'deadlift.jpg' %}" alt="deadlift">
+                <div class="card-body">
+                    <h4 class="card-title">Deadlift Form Check</h4>
+                    <p class="card-text">Not currently available</p>
+                </div>
+                    <a href="#" class="btn btn-secondary">Check it out &raquo;</a>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" style="height: 200px;" src="{% static 'squat.jpg' %}" alt="squat">
+                <div class="card-body">
+                    <h4 class="card-title">Squat Form Check</h4>
+                </div>
+                    <a href="/formcheck" class="btn btn-secondary">Check it out &raquo;</a>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img class="card-img-top" style="height: 200px;" src="{% static 'bench.png' %}" alt="bench">
+                <div class="card-body">
+                    <h4 class="card-title">Bench Form Check</h4>
+                    <p class="card-text">Not currently available</p>
+                </div>
+                    <a href="#" class="btn btn-secondary">Check it out &raquo;</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+

@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}Squat Form Check{% endblock %}
+
+
+{% block content %}
+
+<div  class="text-center mt-5 mb-3">
+    <h1>Squat Form Check</h1>
+    <h3>Video Guidelines</h3>
+    <uL>
+        <li>Limit squat to one rep</li>
+        <li>Pleas record from the side and minimize obstructions</li>
+        <li>Ensure video quality is good</li>
+    </uL>
+    <fieldset name="Video File Upload and Display">
+        {% if msg %} {% autoescape off %} {{ msg }} {% endautoescape %} {% endif %}
+        <form method="post" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <dl>
+                <p>
+                    <label>Browse and select a video file</label>&nbsp;&nbsp;
+                    <input type="file" name="file" autocomplete="off" required>
+                </p>
+            </dl>
+            <p>
+                <input type="submit" value="Upload and Display">
+            </p>
+        </form>
+    </fieldset>
+
+
+    {% if form_check.skeleton_video %}
+    <div style="margin: 10px auto;">
+        <video width="500" height="400" autoplay="autoplay" controls="controls" preload="preload">
+            <source src="{{ form_check.skeleton_video.url }}" type="video/mp4"/>
+        </video>
+    </div>
+    {% endif %}
+    <h2>Results</h2>
+    {% if form_check.prediction %}
+    <div style="margin: 10px auto;">
+        {% if form_check.prediction == "good" %}
+        <p>Nice! We didn't detect any big issues with your squat. Make sure to double-check</p>
+        {% else %}
+        <p>We believe your squat form could use some work. Refer to the feedback section to learn more.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+    <h3>Possible Feedback</h3>
+    {% if form_check.prediction != "good" %}
+    <ul>
+        {% if form_check.nearest1.label == "bad"%}
+        <li> {{ form_check.nearest1.feedback }}</li>
+        {% endif %}
+        {% for item in form_check.additional_feedback_as_list %}
+        <li> {{ item }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</div>
+{% endblock %}
